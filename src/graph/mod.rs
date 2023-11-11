@@ -25,6 +25,10 @@ impl<T> Graph<T> {
         &self.body
     }
 
+    pub fn get_items(&self) -> &Vec<T> {
+        &self.items
+    }
+
     fn fix_connections(g: &mut Graph<T>) {
         for n in 0..g.size {
             g.body[usize::try_from(n).unwrap()][usize::try_from(n).unwrap()] = 0;
@@ -50,5 +54,11 @@ mod tests {
         assert_eq!(g.get_body()[6][6], 0);
 
         assert_eq!(g.get_body()[0][4], 1);
+    }
+
+    #[test]
+    fn get_items() {
+        let g = Graph::new(vec![0, 1, 2, 3, 4, 5, 6, 7]);
+        assert_eq!(g.get_items()[3], 3);
     }
 }
