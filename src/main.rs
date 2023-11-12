@@ -1,7 +1,7 @@
 mod graph;
 mod person;
 
-pub use crate::graph::Graph;
+pub use crate::graph::{Graph, EdgeStatus};
 
 pub use crate::graph::hamiltonian_cycle::HamiltonianCycle;
 
@@ -12,12 +12,26 @@ pub use crate::person::Person;
 
 fn main() {
 
-    let mut people = vec![Person::new("John Doe", "123456"), Person::new("Jane Bruh", "234234243"), Person::new("Thomas Edison", "bruh")];
-    let mut rng = thread_rng();
+    let mut people = vec![
+        Person::new("John Doe", "123456"),
+        Person::new("Jane Bruh", "234234243"),
+        Person::new("Thomas Edison", "bruh"),
+        Person::new("Mama Mia", "Phone number")
+    ];
+    // let mut rng = thread_rng();
 
-    people.shuffle(&mut rng);
+    // people.shuffle(&mut rng);
     
-    let my_graph = Graph::new(people.clone());
+    let mut my_graph = Graph::new(people.clone());
+    let removed = my_graph.remove_edge(2, 3);
+    match removed {
+        Ok(EdgeStatus::Removed) => println!("Bruh: {}", my_graph.get_body()[2][3]),
+        Err(e) => println!("{}", String::from(e)),
+        _ => ()
+    }
+
+    let _ = my_graph.remove_edge(1, 0);
+    
     let path = HamiltonianCycle::new(&my_graph);
 
 

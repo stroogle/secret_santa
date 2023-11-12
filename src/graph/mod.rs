@@ -33,7 +33,7 @@ impl<T> Graph<T> {
 
     pub fn remove_edge(&mut self, vertex_a: i32, vertex_b: i32) -> Result<EdgeStatus, String> {
         let max_vertex = (self.body.len() - 1) as i32;
-        match vertex_a >= max_vertex || vertex_b >= max_vertex {
+        match vertex_a > max_vertex || vertex_b > max_vertex {
             true => Err(format!("vertex_a: {}, vertex_b: {}, maximum valid vertex {}", vertex_a, vertex_b, self.body.len() - 1)),
             _ => {
                 self.body[usize::try_from(vertex_a).unwrap()][usize::try_from(vertex_b).unwrap()] = 0;
@@ -45,7 +45,7 @@ impl<T> Graph<T> {
 
     pub fn add_edge(&mut self, vertex_a: i32, vertex_b: i32) -> Result<EdgeStatus, String> {
         let max_vertex = (self.body.len() - 1) as i32;
-        match vertex_a >= max_vertex || vertex_b >= max_vertex {
+        match vertex_a > max_vertex || vertex_b > max_vertex {
             true => Err(format!("vertex_a: {}, vertex_b: {}, maximum valid vertex {}", vertex_a, vertex_b, self.body.len() - 1)),
             _ => {
                 self.body[usize::try_from(vertex_a).unwrap()][usize::try_from(vertex_b).unwrap()] = 1;
