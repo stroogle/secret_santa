@@ -1,7 +1,9 @@
+pub mod hamiltonian_cycle;
+
 pub struct Graph<T> {
     size: i32,
     body: Vec<Vec<i32>>,
-    items: Vec<T>
+    items: Vec<T>,
 }
 
 impl<T> Graph<T> {
@@ -27,10 +29,6 @@ impl<T> Graph<T> {
 
     pub fn get_items(&self) -> &Vec<T> {
         &self.items
-    }
-
-    pub fn get_hamiltonian_cycle(&self) -> Option<&Vec<i32>> {
-        None
     }
 
     pub fn remove_edge(&mut self, vertex_a: i32, vertex_b: i32) -> Result<EdgeStatus, String> {
@@ -115,11 +113,5 @@ mod tests {
         assert_eq!(g.get_body()[1][0], 0);
 
         assert_eq!(g.remove_edge(4, 7), Err(String::from("vertex_a: 4, vertex_b: 7, maximum valid vertex 2")));
-    }
-
-    #[test]
-    fn get_hamiltonian_path() {
-        let g = Graph::new(vec![0, 1, 2]);
-        assert_eq!(g.get_hamiltonian_cycle(), Some(vec![0, 1, 2]).as_ref());
     }
 }
