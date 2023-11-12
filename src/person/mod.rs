@@ -20,6 +20,15 @@ impl Person {
     }
 }
 
+impl Clone for Person {
+    fn clone(&self) -> Person {
+        Person {
+            name: self.get_name(),
+            number: self.get_number()
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

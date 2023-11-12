@@ -17,7 +17,7 @@ fn main() {
 
     people.shuffle(&mut rng);
     
-    let my_graph = Graph::new(people);
+    let my_graph = Graph::new(people.clone());
     let path = HamiltonianCycle::new(&my_graph);
 
 
