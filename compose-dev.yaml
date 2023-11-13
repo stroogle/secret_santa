@@ -1,7 +1,9 @@
 version: "3.8"
 services:
   dev:
-    image: "rust:1.73-alpine3.17"
+    image: "rust:1.73.0-slim-bullseye"
+    ports:
+      - "127.0.0.1:8080:8080"
     user: "${UID}:${GID}"
     volumes: 
       - .:/app
